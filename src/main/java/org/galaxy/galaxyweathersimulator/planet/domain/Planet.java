@@ -26,7 +26,7 @@ public class Planet {
     this.position = new Double(radius, 0.0);
   }
 
-  public Point2D getPositionForDay(final int day) {
+  public void simulatetPositionForDay(final int day) {
     Validate.isTrue(day > 0, "The day must be positive");
     double angleInDegrees = (angularVelocity * day) % 360;
     if (angularVelocity < 0) {
@@ -37,6 +37,6 @@ public class Planet {
     double x = Precision.round(Math.cos(radianAngle) * radius, 10);
     double y = Precision.round(Math.sin(radianAngle) * radius, 10);
 
-    return new Double(x, y);
+    position = new Double(x, y);
   }
 }

@@ -4,7 +4,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.galaxy.galaxyweathersimulator.forecast.service.SimulateForecastService;
 import org.galaxy.galaxyweathersimulator.forecast.web.dto.ForecastDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/forecast")
 public class ForecastController {
 
+  @Autowired
+  private SimulateForecastService service;
 
   @ApiOperation(
       value = "Calculates the forecast for the planet of the solar system up to a given day",
@@ -31,7 +35,7 @@ public class ForecastController {
   public ResponseEntity<ForecastDto> doForecast(
       @ApiParam(value = "Day up until when the forecast will be calculated", allowableValues = "range[1,infinity]", required = true)
       @PathVariable("day") Integer day) {
-    return ResponseEntity.ok(new ForecastDto());
+    return ResponseEntity.ok(ForecastDto.toDto(service.simulate(day)));
   }
 
 }

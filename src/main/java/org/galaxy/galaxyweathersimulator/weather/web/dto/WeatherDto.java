@@ -16,10 +16,7 @@ public class WeatherDto {
 
   private double precipitation;
 
-  private SolarSystemDto solarSystemDto;
-
   public static WeatherDto toDto(final int day, Weather weather) {
-    return new WeatherDto(day, weather.getWeatherType(),
-        weather.getPrecipitation(), SolarSystemDto.toDto(weather.getSolarSystem()));
+    return new WeatherDto(day, weather.getWeatherType(), weather.getPrecipitation());
   }
 }

@@ -8,7 +8,7 @@ import org.galaxy.galaxyweathersimulator.planet.domain.SolarSystem;
 @AllArgsConstructor
 public class Weather {
 
-  private SolarSystem solarSystem;
+  private int day;
 
   private WeatherType weatherType;
 
