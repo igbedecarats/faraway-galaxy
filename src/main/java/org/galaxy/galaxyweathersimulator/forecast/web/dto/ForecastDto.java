@@ -11,7 +11,7 @@ import org.galaxy.galaxyweathersimulator.weather.web.dto.WeatherDto;
 @AllArgsConstructor
 public class ForecastDto {
 
-  private long numberOfSunnyDays;
+  private long numberOfOptimalDays;
 
   private long numberOfRainyDays;
 
@@ -21,7 +21,7 @@ public class ForecastDto {
 
   public static ForecastDto toDto(Forecast forecast) {
     return new ForecastDto(
-        forecast.numberOfSunnyDays(),
+        forecast.numberOfOptimalDays(),
         forecast.numberOfRainyDays(),
         forecast.numberDroughtDays(),
         Collections.emptyList()

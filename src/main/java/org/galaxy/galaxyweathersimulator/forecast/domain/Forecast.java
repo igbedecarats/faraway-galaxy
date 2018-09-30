@@ -18,8 +18,8 @@ public class Forecast {
     forecast.put(day, weather);
   }
 
-  public long numberOfSunnyDays() {
-    return numberOfDaysWithWeather(WeatherType.SUNNY);
+  public long numberOfOptimalDays() {
+    return numberOfDaysWithWeather(WeatherType.OPTIMAL);
   }
 
   public long numberOfRainyDays() {
