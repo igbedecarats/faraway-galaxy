@@ -21,7 +21,7 @@ public class FindWeatherServiceImpl implements FindWeatherService {
 
   @Override
   public Weather findWeather(int day) {
-    Validate.isTrue(day > 1, "The day must be greater than 1");
+    Validate.isTrue(day >= 0, "The day must be positive.");
     solarSystem.simulatePlanetsPositionForDay(day);
     return weatherResolvers.stream().filter(
         weatherResolver -> weatherResolver.canResolve(solarSystem)

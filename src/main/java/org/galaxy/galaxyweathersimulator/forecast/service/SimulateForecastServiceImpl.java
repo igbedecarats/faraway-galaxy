@@ -13,9 +13,9 @@ public class SimulateForecastServiceImpl implements SimulateForecastService {
 
   @Override
   public Forecast simulate(int day) {
-    Validate.isTrue(day > 1, "The day must be greater than 1");
+    Validate.isTrue(day >= 0, "The day must be positive.");
     Forecast forecast = new Forecast();
-    for (int i = 1; i < day; i++) {
+    for (int i = 1; i <= day; i++) {
       Weather weatherForDay = findWeatherService.findWeather(i);
       forecast.addWeatherForDay(i, weatherForDay);
     }

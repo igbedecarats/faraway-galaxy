@@ -27,7 +27,7 @@ public class Planet {
   }
 
   public void simulatetPositionForDay(final int day) {
-    Validate.isTrue(day > 0, "The day must be positive");
+    Validate.isTrue(day >= 0, "The day must be positive.");
     double angleInDegrees = (angularVelocity * day) % 360;
     if (angularVelocity < 0) {
       angleInDegrees = 360 + angleInDegrees;

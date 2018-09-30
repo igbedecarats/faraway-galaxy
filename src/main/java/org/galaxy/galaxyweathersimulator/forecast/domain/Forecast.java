@@ -13,7 +13,7 @@ public class Forecast {
   private Map<Integer, Weather> forecast = new LinkedHashMap<>();
 
   public void addWeatherForDay(final int day, final Weather weather) {
-    Validate.isTrue(day > 1, "The day must be greater than zero.");
+    Validate.isTrue(day >= 0, "The day must be positive.");
     Validate.notNull(weather, "The weather cannot be null");
     forecast.put(day, weather);
   }
