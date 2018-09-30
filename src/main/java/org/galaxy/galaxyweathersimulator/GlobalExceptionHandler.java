@@ -2,13 +2,11 @@ package org.galaxy.galaxyweathersimulator;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import javax.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,16 +30,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
   @NotNull
   @Override
   protected ResponseEntity<Object> handleExceptionInternal(
-      final Exception ex, final Object body, final HttpHeaders headers, final HttpStatus status,
-      final WebRequest request) {
+      @NotNull final Exception ex, final Object body, final HttpHeaders headers, final HttpStatus status,
+      @NotNull final WebRequest request) {
     logger.error("Spring MVC exception occurred", ex);
     return super.handleExceptionInternal(ex, body, headers, status, request);
-  }
-
-  @ExceptionHandler({EntityNotFoundException.class, EmptyResultDataAccessException.class})
-  @ResponseBody
-  public ResponseEntity<?> handleEntityNotFound(final Exception ex) {
-    return toResponseEntity(ex, HttpStatus.NOT_FOUND);
   }
 
   @ExceptionHandler({IllegalArgumentException.class, NullPointerException.class})
@@ -78,7 +70,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @JsonInclude(Include.NON_EMPTY)
     private String message;
 
-    public static HttpApiError create(final HttpStatus status, final String message) {
+    static HttpApiError create(final HttpStatus status, final String message) {
       return new HttpApiError(status, message);
     }
   }

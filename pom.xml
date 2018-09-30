@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>galaxy-weather-simulator</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Simulator for forecast and weather of far away galaxy</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -25,10 +25,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jersey</artifactId>
@@ -67,11 +63,6 @@
     </dependency>
 
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -82,8 +73,6 @@
       <version>3.5</version>
     </dependency>
   </dependencies>
-
-
 
 	<build>
 		<plugins>
