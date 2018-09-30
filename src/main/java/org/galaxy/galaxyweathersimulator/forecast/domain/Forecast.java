@@ -1,5 +1,6 @@
 package org.galaxy.galaxyweathersimulator.forecast.domain;
 
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import lombok.NoArgsConstructor;
@@ -30,8 +31,17 @@ public class Forecast {
     return numberOfDaysWithWeather(WeatherType.DROUGHT);
   }
 
-  public Map<Integer, Weather> getMostRainyDays() {
-    return null;
+  /**
+   * Returns the weather for the day with rainy conditions and the most precipitation.
+   *
+   * @return The weather for the day with rainy conditions and the most precipitation, or null if there isn't any rainy
+   * day in the forecast.
+   */
+  public Weather getMostRainyDays() {
+    return forecast.values().stream()
+        .filter(weather -> weather.getWeatherType().equals(WeatherType.RAIN))
+        .max(Comparator.comparing(Weather::getPrecipitation))
+        .orElse(null);
   }
 
   private long numberOfDaysWithWeather(final WeatherType weatherType) {

@@ -15,4 +15,8 @@ public class WeatherFactory {
   public static Weather createOptimaltWeather(final int day) {
     return new Weather(day, WeatherType.OPTIMAL, DEFAULT_PRECIPITAION);
   }
+
+  public static Weather createRainyWeather(final int day, final double precipitation) {
+    return new Weather(day, WeatherType.RAIN, precipitation);
+  }
 }

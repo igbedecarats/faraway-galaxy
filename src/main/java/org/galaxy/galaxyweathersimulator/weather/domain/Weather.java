@@ -2,7 +2,6 @@ package org.galaxy.galaxyweathersimulator.weather.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.galaxy.galaxyweathersimulator.planet.domain.SolarSystem;
 
 @Getter
 @AllArgsConstructor

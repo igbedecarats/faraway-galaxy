@@ -15,26 +15,20 @@ public class OptimalWeatherResolver implements WeatherResolver {
    * weather condition if its 3 planets are <a href="http://mathworld.wolfram.com/Collinear.html">collinear</a> with
    * each other, but not its center.
    *
-   * @param solarSystem The solar system to the determine if it's in drought weather condition. It cannot be null.
+   * @param solarSystem The solar system to the determine if it's in optimal weather condition. It cannot be null.
    * @return <b>true</b> if the weather of the solar system is in optimal weather condition, i.e., the slopes of the
-   * planet pairs are equal between them but not with the sollary system center; otherwise, returns false.
+   * planet pairs are equal between them but not with the sollary system center; otherwise, returns <b>false</b>.
    */
   @Override
   public boolean canResolve(SolarSystem solarSystem) {
     Validate.notNull(solarSystem, "The solar system cannot be null.");
-    Point2D center = new Double(0.0d, 0.0d);
+    Point2D center = solarSystem.getCenter();
     Planet betasoide = solarSystem.getBetasoide();
     Planet ferengi = solarSystem.getFerengi();
     Planet vulcano = solarSystem.getVulcano();
-    double slopeCenterAndBetasoide =
-        (betasoide.getPosition().getY() - center.getY())
-            / (betasoide.getPosition().getX() - center.getX());
-    double slopeBetasoideAndFerengi =
-        (betasoide.getPosition().getY() - ferengi.getPosition().getY())
-            / (betasoide.getPosition().getX() - ferengi.getPosition().getX());
-    double slopeFerengiAndVulcano =
-        (ferengi.getPosition().getY() - vulcano.getPosition().getY())
-            / (ferengi.getPosition().getX() - vulcano.getPosition().getX());
+    double slopeCenterAndBetasoide = MathCalculationUtils.getSlope(center, betasoide.getPosition());
+    double slopeBetasoideAndFerengi = MathCalculationUtils.getSlope(betasoide.getPosition(), ferengi.getPosition());
+    double slopeFerengiAndVulcano = MathCalculationUtils.getSlope(ferengi.getPosition(), vulcano.getPosition());
     return (slopeCenterAndBetasoide != slopeBetasoideAndFerengi)
         && (slopeBetasoideAndFerengi == slopeFerengiAndVulcano)
         && (slopeCenterAndBetasoide == slopeFerengiAndVulcano);
