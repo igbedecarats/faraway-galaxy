@@ -2,7 +2,6 @@ package org.galaxy.galaxyweathersimulator.weather.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.galaxy.galaxyweathersimulator.planet.web.dto.SolarSystemDto;
 import org.galaxy.galaxyweathersimulator.weather.domain.Weather;
 import org.galaxy.galaxyweathersimulator.weather.domain.WeatherType;
 
@@ -16,7 +15,7 @@ public class WeatherDto {
 
   private double precipitation;
 
-  public static WeatherDto toDto(final int day, Weather weather) {
-    return new WeatherDto(day, weather.getWeatherType(), weather.getPrecipitation());
+  public static WeatherDto toDto(Weather weather) {
+    return new WeatherDto(weather.getDay(), weather.getWeatherType(), weather.getPrecipitation());
   }
 }

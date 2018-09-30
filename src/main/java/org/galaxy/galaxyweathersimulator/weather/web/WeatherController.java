@@ -1,11 +1,12 @@
-package org.galaxy.galaxyweathersimulator.forecast.web;
+package org.galaxy.galaxyweathersimulator.weather.web;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.galaxy.galaxyweathersimulator.forecast.service.SimulateForecastService;
 import org.galaxy.galaxyweathersimulator.forecast.web.dto.ForecastDto;
+import org.galaxy.galaxyweathersimulator.weather.service.FindWeatherService;
+import org.galaxy.galaxyweathersimulator.weather.web.dto.WeatherDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,25 +18,23 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/forecast")
-public class ForecastController {
+@RequestMapping("/api/weather")
+public class WeatherController {
 
   @Autowired
-  private SimulateForecastService service;
+  private FindWeatherService service;
 
   @ApiOperation(
-      value = "Calculates the forecast for the planet of the solar system up to a given day",
-      notes = "The forecast calculation includes: number of drought days, number of rainy days, "
-          + "day with maximum amount of rain and days with optimum weather conditions")
+      value = "Finds the weather for the Solar System for a given day",
+      notes = "If a specific weather cannot be found, then unknown weather will be returned")
   @ApiResponses({
-      @ApiResponse(code = 200, message = "The forecast was calculated successfully", response = ForecastDto.class),
+      @ApiResponse(code = 200, message = "A weather could be returned", response = ForecastDto.class),
   })
   @GetMapping(value = "/{day}", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  public ResponseEntity<ForecastDto> doForecast(
-      @ApiParam(value = "The day up until when the forecast will be calculated", allowableValues = "range[1,infinity]", required = true)
+  public ResponseEntity<WeatherDto> doForecast(
+      @ApiParam(value = "The day of the weather to be returned", allowableValues = "range[1,infinity]", required = true)
       @PathVariable("day") Integer day) {
-    return ResponseEntity.ok(ForecastDto.toDto(service.simulate(day)));
+    return ResponseEntity.ok(WeatherDto.toDto(service.findWeather(day)));
   }
-
 }
