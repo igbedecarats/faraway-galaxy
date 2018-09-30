@@ -7,4 +7,8 @@ public class WeatherFactory {
   public static Weather createUndefinedWeather(final int day) {
     return new Weather(day, WeatherType.UNDEFINED, DEFAULT_PRECIPITAION);
   }
+
+  public static Weather createDroughtWeather(final int day) {
+    return new Weather(day, WeatherType.DROUGHT, DEFAULT_PRECIPITAION);
+  }
 }
