@@ -1,0 +1,18 @@
+info:
+  build:
+    group: @project.groupId@
+    artifact: @project.artifactId@
+    version: @project.version@
+    name: @project.name@
+
+management:
+  endpoints:
+    enabled-by-default: false
+  endpoint:
+    health:
+      enabled: true
+      show-details: never
+      cache:
+        time-to-live: 20000ms
+    info:
+      enabled: true
