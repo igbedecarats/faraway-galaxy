@@ -1,6 +1,6 @@
-# faraway-galaxy
+# galaxy-weather-simulator
 
-### Ejercicio:
+## Ejercicio
 
 En una galaxia lejana, existen tres civilizaciones. Vulcanos, Ferengis y Betasoides. Cada civilización vive en paz en su respectivo planeta.
 Dominan la predicción del clima mediante un complejo sistema informático. A continuación el diagrama del sistema solar.
@@ -26,3 +26,18 @@ Para poder utilizar el sistema como un servicio a las otras civilizaciones, los 
 - Generar una API REST la cual devuelve en formato JSON la condición climática del día consultado.
 - Hostear el modelo de datos y la API REST en un cloud computing libre (como APP Engine o Cloudfoudry) y enviar la URL para consulta:
 Ej: GET → http://....../clima?dia=566 → Respuesta: {“dia”:566, “clima”:”lluvia”}
+
+## Requisitos técnicos
+
+- JDK 1.8 en adelante
+- Maven 3.3 en adelante
+
+## Build de la aplicación
+
+```
+mvn clean install
+```
+
+## Deploy de la aplicación
+
+La misma se encuentra actualmente deployada en [Heroku](https://galaxy-weather-simulator.herokuapp.com/swagger-ui.html#/)
