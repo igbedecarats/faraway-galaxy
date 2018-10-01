@@ -14,6 +14,8 @@ public class FindWeatherServiceImpl implements FindWeatherService {
   private UndefinedWeatherResolver undefinedWeatherResolver;
 
   public FindWeatherServiceImpl(final SolarSystem solarSystem, final List<WeatherResolver> weatherResolvers) {
+    Validate.notNull(solarSystem, "The solar system cannot be null");
+    Validate.notNull(weatherResolvers, "The weather resolvers cannot be null");
     this.solarSystem = solarSystem;
     this.weatherResolvers = weatherResolvers;
     this.undefinedWeatherResolver = new UndefinedWeatherResolver();

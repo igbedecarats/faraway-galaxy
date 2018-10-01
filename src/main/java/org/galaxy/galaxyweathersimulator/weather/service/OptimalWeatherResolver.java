@@ -1,13 +1,16 @@
 package org.galaxy.galaxyweathersimulator.weather.service;
 
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Double;
 import org.apache.commons.lang3.Validate;
 import org.galaxy.galaxyweathersimulator.planet.domain.Planet;
 import org.galaxy.galaxyweathersimulator.planet.domain.SolarSystem;
 import org.galaxy.galaxyweathersimulator.weather.domain.Weather;
 import org.galaxy.galaxyweathersimulator.weather.domain.WeatherFactory;
 
+/**
+ * Resolves the Galaxy's solar system weather
+ * when it's in {@link org.galaxy.galaxyweathersimulator.weather.domain.WeatherType#OPTIMAL} day.
+ */
 public class OptimalWeatherResolver implements WeatherResolver {
 
   /**
@@ -26,17 +29,28 @@ public class OptimalWeatherResolver implements WeatherResolver {
     Planet betasoide = solarSystem.getBetasoide();
     Planet ferengi = solarSystem.getFerengi();
     Planet vulcano = solarSystem.getVulcano();
-    double slopeCenterAndBetasoide = MathCalculationUtils.getSlope(center, betasoide.getPosition());
-    double slopeBetasoideAndFerengi = MathCalculationUtils.getSlope(betasoide.getPosition(), ferengi.getPosition());
-    double slopeFerengiAndVulcano = MathCalculationUtils.getSlope(ferengi.getPosition(), vulcano.getPosition());
-    return (slopeCenterAndBetasoide != slopeBetasoideAndFerengi)
-        && (slopeBetasoideAndFerengi == slopeFerengiAndVulcano)
-        && (slopeCenterAndBetasoide == slopeFerengiAndVulcano);
+    return arePlanetsNotAllinedWithCenter(center, betasoide, ferengi, vulcano);
 
   }
 
+  private boolean arePlanetsNotAllinedWithCenter(Point2D center, Planet betasoide, Planet ferengi, Planet vulcano) {
+    double slopeCenterAndBetasoide = MathCalculationUtils.getLineSlope(center, betasoide.getPosition());
+    double slopeBetasoideAndFerengi = MathCalculationUtils.getLineSlope(betasoide.getPosition(), ferengi.getPosition());
+    double slopeFerengiAndVulcano = MathCalculationUtils.getLineSlope(ferengi.getPosition(), vulcano.getPosition());
+    return (slopeCenterAndBetasoide != slopeBetasoideAndFerengi)
+        && (slopeBetasoideAndFerengi == slopeFerengiAndVulcano)
+        && (slopeCenterAndBetasoide == slopeFerengiAndVulcano);
+  }
+
+  /**
+   * Resolves the galaxy's solar system weather by returning a weather of the type optimal.
+   *
+   * @param solarSystem The solar system for the weather to be resolved. It cannot be null.
+   * @return the galaxy's solar system weather of the type optimal. It's never null.
+   */
   @Override
   public Weather resolve(SolarSystem solarSystem) {
+    Validate.notNull(solarSystem, "The solar system cannot be null.");
     return WeatherFactory.createOptimaltWeather(solarSystem.getDay());
   }
 }

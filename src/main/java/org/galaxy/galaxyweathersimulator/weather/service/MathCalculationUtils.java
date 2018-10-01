@@ -5,7 +5,7 @@ import org.apache.commons.lang3.Validate;
 
 class MathCalculationUtils {
 
-  static double getSlope(final Point2D point1, final Point2D point2) {
+  static double getLineSlope(final Point2D point1, final Point2D point2) {
     Validate.notNull(point1, "The point1 cannot be null.");
     Validate.notNull(point2, "The point2 cannot be null.");
     return (point1.getY() - point2.getY()) / (point1.getX() - point2.getX());

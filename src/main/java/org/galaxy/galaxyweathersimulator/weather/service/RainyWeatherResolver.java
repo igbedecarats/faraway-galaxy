@@ -9,6 +9,10 @@ import org.galaxy.galaxyweathersimulator.planet.domain.SolarSystem;
 import org.galaxy.galaxyweathersimulator.weather.domain.Weather;
 import org.galaxy.galaxyweathersimulator.weather.domain.WeatherFactory;
 
+/**
+ * Resolves the Galaxy's solar system weather
+ * when it's in {@link org.galaxy.galaxyweathersimulator.weather.domain.WeatherType#RAIN} day.
+ */
 public class RainyWeatherResolver implements WeatherResolver {
 
   /**
